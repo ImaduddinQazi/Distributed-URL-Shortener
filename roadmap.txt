@@ -1,0 +1,206 @@
+first build a solid, clean core → then layer uniqueness.
+With 2–2.5 weeks, this is very doable if you follow a disciplined roadmap.
+
+Below is a day-by-day, engineering-grade roadmap. No fluff. No overload.
+
+🗺️ 2–2.5 WEEK ROADMAP
+
+Distributed URL Shortener → Unique, Resume-Ready System
+
+Assumption: You work ~3–4 focused hours/day
+
+🔹 PHASE 0 – Setup & Thinking (Day 0.5)
+
+Goal: Don’t write bad code fast.
+
+Tasks
+
+Choose backend:
+
+✅ Node.js (Express) OR Flask
+
+Choose DB:
+
+PostgreSQL (recommended) or MongoDB
+
+Create GitHub repo
+
+Write a 1-page design doc:
+
+Architecture diagram (rough)
+
+Components list
+
+Data flow
+
+⏱️ Time: 3–4 hours
+📌 Output: Clean repo + clarity
+
+🔹 PHASE 1 – Core Backend (Days 1–4)
+
+Goal: Make URL shortening WORK.
+
+Day 1 – Project Skeleton
+
+Backend folder structure
+
+Environment config
+
+Health check API
+
+DB connection
+
+Checkpoint
+
+Server runs + DB connected
+
+Day 2 – URL Creation API
+
+POST /shorten
+
+Store long URL in DB
+
+Generate auto-increment ID
+
+Convert ID → Base62 short code
+
+Return short URL
+
+Checkpoint
+
+You can create short URLs
+
+Day 3 – Redirect API
+
+GET /:short_code
+
+Fetch long URL from DB
+
+301 redirect
+
+Handle invalid codes
+
+Checkpoint
+
+Short link redirects correctly
+
+Day 4 – Edge Cases
+
+Input validation
+
+Duplicate URL handling (optional)
+
+Expiry field support
+
+Error handling
+
+Checkpoint
+
+Stable core system
+
+🔹 PHASE 2 – Caching & Performance (Days 5–7)
+
+Goal: Make it FAST and scalable.
+
+Day 5 – Redis Integration
+
+Setup Upstash Redis
+
+Cache short_code → long_url
+
+Cache miss → DB → cache
+
+Checkpoint
+
+Redis cache working
+
+Day 6 – Cache Strategy
+
+TTL decisions
+
+Cache invalidation logic
+
+Redis fallback handling
+
+Checkpoint
+
+You can explain cache logic
+
+Day 7 – Load Thinking
+
+Explain read-heavy optimization
+
+Add basic logging
+
+Write performance notes in README
+
+Checkpoint
+
+Interview-ready explanation
+
+🔹 PHASE 3 – Deployment (Days 8–9)
+
+Goal: Make it LIVE.
+
+Day 8 – Backend Deployment
+
+Deploy backend to Render/Fly.io
+
+Setup env vars
+
+Test APIs live
+
+Day 9 – Frontend (Minimal)
+
+Simple React UI:
+
+Input long URL
+
+Get short URL
+
+Deploy frontend to Vercel
+
+Checkpoint
+
+Live link works end-to-end 🎉
+
+🔹 PHASE 4 – Uniqueness Layer (Days 10–13)
+
+Goal: Stand out from everyone else.
+
+Pick 2 features only (important).
+Day 10 – Feature #1 (Security or Intelligence)
+
+Choose ONE:
+
+URL risk scoring
+
+Abuse rate limiting
+
+Signed URLs
+
+Day 11 – Finish Feature #1
+
+Edge cases
+
+Explain logic
+
+Add README section
+
+Day 12 – Feature #2 (Analytics or Performance)
+
+Choose ONE:
+
+Geo analytics
+
+Adaptive caching
+
+Click analytics dashboard
+
+Day 13 – Polish Feature #2
+
+Clean code
+
+Validate results
+
+Update architecture diagram
