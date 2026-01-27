@@ -5,6 +5,22 @@ distributed URL shortener designed for high traffic and low-latency redirects, f
 # 3. Core Components (bullet points)
 
 ## API Layer (Express routes)
+
+### URL shortening:
+To create a new short URL, a client sends a POST request, which contains one parameter: the original long URL. The API looks like this:
+
+POST api/v1/data/shorten
+
+- request parameter: {longUrl: longURLString}
+- return: shortURL
+
+### URL redirecting:
+To redirect a short URL to the corresponding long URL, a client sends a GET request. The API looks like this:
+
+GET api/v1/shortUrl
+
+- return: longURL for HTTP redirection
+
 ## Cache Layer (Redis)
 ## Database Layer (PostgreSQL)
 ## URL Generator (Base62 encoder)
