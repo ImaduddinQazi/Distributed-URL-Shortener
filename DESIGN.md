@@ -23,6 +23,9 @@ If miss: fetch DB → update Redis → redirect
 # 5. Key Design Decisions
 
 Why Base62? (URL-safe, compact, sequential)
+
 Why PostgreSQL? (ACID, reliable auto-increment)
+
 Why Redis? (Sub-millisecond reads for hot URLs)
+
 Why cache-aside pattern? (Database is source of truth)
