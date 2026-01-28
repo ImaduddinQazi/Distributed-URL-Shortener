@@ -22,7 +22,13 @@ GET api/v1/shortUrl
 - return: longURL for HTTP redirection
 
 ## Cache Layer (Redis)
+
+Using Redis for caching and faster respone to requested Long URLs. 
+
 ## Database Layer (PostgreSQL)
+
+PostgreSQL is reliable, ACID‑compliant, and offers powerful indexing/constraints to prevent collisions. It balances SQL rigor with JSON flexibility, making it robust yet adaptable for scalable URL shorteners.
+
 ## URL Generator (Base62 encoder)
 
 ##4. Request Flow for Two Operations
