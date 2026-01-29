@@ -30,7 +30,7 @@ Using Redis for caching and faster respone to requested Long URLs.
 PostgreSQL is reliable, ACID‑compliant, and offers powerful indexing/constraints to prevent collisions. It balances SQL rigor with JSON flexibility, making it robust yet adaptable for scalable URL shorteners.
 
 ## URL Generator (Base62 encoder)
-Base conversion is an approach commonly used for URL shorteners. Base conversion helps to convert the same number between its different number representation systems. Base 62 conversion is used as there are 62 possible characters for hashValue. Collision is not possible because ID is unique.
+Base conversion is an approach commonly used for URL shorteners. Base conversion helps to convert the same number between its different number representation systems. Base 62 conversion is used as there are 62 possible characters for hashValue. Collision is not possible because ID is unique. ( 62 => 0-9(10) + a-z(26) + A-Z(26) )  
 
 # 4. Request Flow for Two Operations
 ### Flow 1: Creating a Short URL
