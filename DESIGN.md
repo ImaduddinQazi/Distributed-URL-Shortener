@@ -31,12 +31,12 @@ PostgreSQL is reliable, ACID‑compliant, and offers powerful indexing/constrain
 
 ## URL Generator (Base62 encoder)
 
-##4. Request Flow for Two Operations
-## Flow 1: Creating a Short URL
+# 4. Request Flow for Two Operations
+### Flow 1: Creating a Short URL
 User → POST /shorten → API validates → 
 Generate ID → Encode to Base62 → 
 Store in DB → Return short URL
-## Flow 2: Redirecting
+### Flow 2: Redirecting
 User → GET /:code → Check Redis → 
 If hit: redirect → 
 If miss: fetch DB → update Redis → redirect
