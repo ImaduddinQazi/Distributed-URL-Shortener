@@ -46,6 +46,9 @@ If miss: fetch DB → update Redis → redirect
 # 5. Key Design Decisions
 
 Why Base62? (URL-safe, compact, sequential)
+- URL-safe characters (no special encoding needed)
+- Compact representation (7 chars = 3.5 trillion URLs)
+- Sequential generation (no collisions)
 
 Why PostgreSQL? (ACID, reliable auto-increment)
 
