@@ -39,6 +39,27 @@ app.get('/health', async (req, res) => {
   }
 });
 
+// Cache statistics endpoint
+app.get('/api/cache-stats', async (req, res) => {
+  try {
+    const { redis } = require('./config/redis');
+    
+    if (!redis) {
+      return res.status(503).json({ error: 'Redis not available' });
+    }
+    
+    const info = await redis.dbsize();
+    
+    res.json({
+      cached_urls: info,
+      ttl_seconds: process.env.REDIS_TTL || 3600,
+      status: 'operational'
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch cache stats' });
+  }
+});
+
 // URL routes
 app.use('/', urlRoutes);
 
