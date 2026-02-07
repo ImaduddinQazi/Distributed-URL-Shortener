@@ -51,6 +51,9 @@ Why Base62? (URL-safe, compact, sequential)
 - Sequential generation (no collisions)
 
 Why PostgreSQL? (ACID, reliable auto-increment)
+- ACID compliance
+- Reliable auto-increment IDs
+- Strong consistency
 
 Why Redis? (Sub-millisecond reads for hot URLs)
 
