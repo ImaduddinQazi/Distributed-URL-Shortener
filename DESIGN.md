@@ -56,5 +56,8 @@ Why PostgreSQL? (ACID, reliable auto-increment)
 - Strong consistency
 
 Why Redis? (Sub-millisecond reads for hot URLs)
+- Sub-millisecond reads
+- Reduces database load
+- Horizontal scalability
 
 Why cache-aside pattern? (Database is source of truth)
