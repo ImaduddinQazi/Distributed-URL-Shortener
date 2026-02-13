@@ -2,6 +2,12 @@
 
 A production-ready URL shortening service with Node.js backend and React frontend.
 
+## 🌐 Live Demo
+
+- **Frontend**: https://url-shortener-frontend-xxxx.vercel.app
+- **Backend API**: https://url-shortener-api-xxxx.onrender.com
+- **Health Check**: https://url-shortener-api-xxxx.onrender.com/health
+
 ## 📁 Project Structure
 ```
 url-shortener/
