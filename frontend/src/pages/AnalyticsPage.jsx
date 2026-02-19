@@ -3,18 +3,45 @@ import { getURLStats } from '../services/api';
 import { formatDate } from '../utils/helpers';
 
 function AnalyticsPage() {
-  const [shortCode, setShortCode] = useState('');
+  const [input, setInput] = useState('');
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  // Extract short code from input (handles both URL and plain code)
+  const extractShortCode = (input) => {
+    const trimmed = input.trim();
+    
+    // If it's a URL, extract the short code
+    if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+      try {
+        const url = new URL(trimmed);
+        // Get the last part of the path (short code)
+        const pathParts = url.pathname.split('/').filter(Boolean);
+        return pathParts[pathParts.length - 1] || '';
+      } catch (error) {
+        return '';
+      }
+    }
+    
+    // Otherwise, treat it as a plain short code
+    return trimmed;
+  };
 
   const handleFetchStats = async (e) => {
     e.preventDefault();
     setError('');
     setStats(null);
 
-    if (!shortCode.trim()) {
-      setError('Please enter a short code');
+    if (!input.trim()) {
+      setError('Please enter a short code or URL');
+      return;
+    }
+
+    const shortCode = extractShortCode(input);
+
+    if (!shortCode) {
+      setError('Could not extract short code from input');
       return;
     }
 
@@ -45,15 +72,18 @@ function AnalyticsPage() {
           <form onSubmit={handleFetchStats} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Enter short code
+                Enter short code or full URL
               </label>
               <input
                 type="text"
-                value={shortCode}
-                onChange={(e) => setShortCode(e.target.value)}
-                placeholder="e.g., 1, abc, xyz123"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="e.g., 1 or http://localhost:3000/1"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               />
+              <p className="text-xs text-gray-500 mt-2">
+                You can paste either the short code (e.g., "6") or the full URL (e.g., "http://localhost:3000/6")
+              </p>
             </div>
 
             {error && (
@@ -107,7 +137,7 @@ function AnalyticsPage() {
                 <div className="text-xs font-medium text-gray-500 mb-2">
                   ORIGINAL URL
                 </div>
-                <a
+                <a                
                   href={stats.long_url}
                   target="_blank"
                   rel="noopener noreferrer"
