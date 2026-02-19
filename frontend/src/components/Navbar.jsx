@@ -11,9 +11,10 @@ function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl">🔗</span>
+            {/* <span className="text-2xl">🔗</span> */}
+            <img src="/src/assets/logoF.png" alt="LinkKit Logo" className="h-20 w-20" />
             <span className="text-xl font-semibold text-gray-900">
-              LinkKit
+              FluxURL
             </span>
           </Link>
           
