@@ -1,6 +1,7 @@
 const db = require('../config/database');
 const { encode, decode } = require('../utils/base62');
 const { getCache, setCache, deleteCache } = require('../config/redis');
+const { generateQRCode } = require('../utils/qrcode');
 
 /**
  * Shorten a long URL
@@ -35,10 +36,14 @@ async function shortenURL(req, res) {
       const short_code = existingUrl.rows[0].short_code;
       const short_url = `${req.protocol}://${req.get('host')}/${short_code}`;
       
+      // Generate QR code for existing URL
+      const qr_code = await generateQRCode(short_url);
+      
       return res.status(200).json({
         short_url,
         short_code,
         long_url,
+        qr_code,
         message: 'URL already exists'
       });
     }
@@ -64,16 +69,20 @@ async function shortenURL(req, res) {
       [short_code, id]
     );
     
-    // Pre-populate cache (write-through)
-    await setCache(`url:${short_code}`, long_url);
-    
     // Build short URL
     const short_url = `${req.protocol}://${req.get('host')}/${short_code}`;
+    
+    // Generate QR code
+    const qr_code = await generateQRCode(short_url);
+    
+    // Pre-populate cache (write-through)
+    await setCache(`url:${short_code}`, long_url);
     
     res.status(201).json({
       short_url,
       short_code,
       long_url,
+      qr_code,
       expires_at,
       created_at: result.rows[0].created_at
     });
@@ -186,13 +195,21 @@ async function getURLStats(req, res) {
     const cacheKey = `url:${short_code}`;
     const isCached = await getCache(cacheKey) !== null;
     
+    // Build short URL
+    const short_url = `${req.protocol}://${req.get('host')}/${short_code}`;
+    
+    // Generate QR code
+    const qr_code = await generateQRCode(short_url);
+    
     res.status(200).json({
       short_code: urlData.short_code,
+      short_url,
       long_url: urlData.long_url,
       created_at: urlData.created_at,
       expires_at: urlData.expires_at,
       click_count: urlData.click_count,
-      is_cached: isCached
+      is_cached: isCached,
+      qr_code
     });
     
   } catch (error) {

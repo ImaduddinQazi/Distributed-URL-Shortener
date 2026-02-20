@@ -119,6 +119,30 @@ function AnalyticsPage() {
                 </div>
               </div>
 
+              {stats.qr_code && (
+                <div className="bg-white rounded-lg p-6 border border-gray-200 flex flex-col items-center">
+                  <h4 className="font-medium text-gray-900 mb-4">QR Code</h4>
+                  <img
+                    src={stats.qr_code}
+                    alt="QR Code"
+                    className="w-48 h-48 border-2 border-gray-200 rounded-lg"
+                  />
+                  <button
+                    onClick={() => {
+                      const link = document.createElement('a');
+                      link.href = stats.qr_code;
+                      link.download = `qr-${stats.short_code}.png`;
+                      link.click();
+                    }}
+                    className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm"
+                  >
+                    Download QR Code
+                  </button>
+                </div>
+              )}
+
+              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <InfoCard label="Short Code" value={stats.short_code} mono />
                 <InfoCard 

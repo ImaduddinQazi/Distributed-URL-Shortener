@@ -47,6 +47,15 @@ function ShortenPage() {
     }
   };
 
+  const handleDownloadQR = () => {
+    if (result?.qr_code) {
+      const link = document.createElement('a');
+      link.href = result.qr_code;
+      link.download = `qr-${result.short_code}.png`;
+      link.click();
+    }
+  };
+
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-gray-50 py-12 px-4">
       <div className="max-w-2xl mx-auto">
@@ -100,7 +109,7 @@ function ShortenPage() {
                 </span>
               </div>
               
-              <div className="flex gap-2">
+              <div className="flex gap-2 mb-6">
                 <input
                   type="text"
                   value={result.short_url}
@@ -114,6 +123,35 @@ function ShortenPage() {
                   {copied ? '✓ Copied' : 'Copy'}
                 </button>
               </div>
+
+              {/* QR Code Section */}
+              {result.qr_code && (
+                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-6 border border-blue-100">
+                  <div className="flex flex-col md:flex-row items-center gap-6">
+                    <div className="flex-shrink-0">
+                      <img 
+                        src={result.qr_code} 
+                        alt="QR Code" 
+                        className="w-40 h-40 border-4 border-white rounded-lg shadow-md"
+                      />
+                    </div>
+                    <div className="flex-1 text-center md:text-left">
+                      <h3 className="font-semibold text-gray-900 mb-2">
+                        📱 QR Code Ready!
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-4">
+                        Scan this QR code to access your shortened URL instantly
+                      </p>
+                      <button
+                        onClick={handleDownloadQR}
+                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-medium"
+                      >
+                        Download QR Code
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               <div className="mt-4 p-4 bg-blue-50 rounded-lg">
                 <div className="text-xs text-gray-600 space-y-1">
@@ -137,15 +175,15 @@ function ShortenPage() {
           <ul className="space-y-2 text-sm text-gray-600">
             <li className="flex items-start gap-2">
               <span className="text-blue-600 mt-0.5">•</span>
+              <span>QR codes are generated automatically for easy sharing</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-blue-600 mt-0.5">•</span>
               <span>Links are cached with Redis for instant redirects</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-blue-600 mt-0.5">•</span>
               <span>Track clicks and performance in the Analytics tab</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-blue-600 mt-0.5">•</span>
-              <span>All URLs are validated before shortening</span>
             </li>
           </ul>
         </div>
