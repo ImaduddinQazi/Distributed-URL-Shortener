@@ -12,9 +12,9 @@ function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             {/* <span className="text-2xl">🔗</span> */}
-            <img src="/src/assets/logoF.png" alt="LinkKit Logo" className="h-20 w-20" />
+            <img src="/src/assets/logoF.png" alt="EdgeURL Logo" className="h-20 w-20" />
             <span className="text-xl font-semibold text-gray-900">
-              FluxURL
+              EdgeURL
             </span>
           </Link>
           
