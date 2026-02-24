@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { getURLStats } from '../services/api';
+// import { getURLStats } from '../services/api';
 import { formatDate } from '../utils/helpers';
 import ClickChart from '../components/ClickChart';
+import { getURLStats, getClickAnalytics } from '../services/api';
 
 function AnalyticsPage() {
   const [input, setInput] = useState('');
@@ -172,15 +173,15 @@ function AnalyticsPage() {
 
               {analytics && (
                 <div className="space-y-6">
-                  <ClickChart
+                  {/* <ClickChart
                     data={analytics.clicks_by_hour}
                     title="Clicks in Last 24 Hours"
-                    dataKey="hour"
-                  />
+                    timeRange="hour"
+                  /> */}
                   <ClickChart
                     data={analytics.clicks_by_day}
                     title="Clicks in Last 30 Days"
-                    dataKey="date"
+                    timeRange="day"
                   />
                 </div>
               )}
