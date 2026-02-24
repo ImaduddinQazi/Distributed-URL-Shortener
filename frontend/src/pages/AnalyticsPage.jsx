@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { getURLStats } from '../services/api';
 import { formatDate } from '../utils/helpers';
+import ClickChart from '../components/ClickChart';
 
 function AnalyticsPage() {
   const [input, setInput] = useState('');
   const [stats, setStats] = useState(null);
+  const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -32,6 +34,7 @@ function AnalyticsPage() {
     e.preventDefault();
     setError('');
     setStats(null);
+    setAnalytics(null);
 
     if (!input.trim()) {
       setError('Please enter a short code or URL');
@@ -46,13 +49,23 @@ function AnalyticsPage() {
     }
 
     setLoading(true);
-    const response = await getURLStats(shortCode);
+    
+    // Fetch both stats and analytics
+    const [statsResponse, analyticsResponse] = await Promise.all([
+      getURLStats(shortCode),
+      getClickAnalytics(shortCode)
+    ]);
+    
     setLoading(false);
 
-    if (response.success) {
-      setStats(response.data);
+    if (statsResponse.success) {
+      setStats(statsResponse.data);
     } else {
-      setError(response.error);
+      setError(statsResponse.error);
+    }
+    
+    if (analyticsResponse.success) {
+      setAnalytics(analyticsResponse.data);
     }
   };
 
@@ -156,6 +169,21 @@ function AnalyticsPage() {
                   value={stats.expires_at ? formatDate(stats.expires_at) : 'Never'} 
                 />
               </div>
+
+              {analytics && (
+                <div className="space-y-6">
+                  <ClickChart
+                    data={analytics.clicks_by_hour}
+                    title="Clicks in Last 24 Hours"
+                    dataKey="hour"
+                  />
+                  <ClickChart
+                    data={analytics.clicks_by_day}
+                    title="Clicks in Last 30 Days"
+                    dataKey="date"
+                  />
+                </div>
+              )}
 
               <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
                 <div className="text-xs font-medium text-gray-500 mb-2">

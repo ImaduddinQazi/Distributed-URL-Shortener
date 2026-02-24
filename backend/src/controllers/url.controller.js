@@ -106,6 +106,9 @@ async function shortenURL(req, res) {
 /**
  * Redirect to long URL (with caching)
  */
+/**
+ * Redirect to long URL (with caching and click logging)
+ */
 async function redirectURL(req, res) {
   try {
     const { short_code } = req.params;
@@ -116,6 +119,12 @@ async function redirectURL(req, res) {
     
     if (long_url) {
       console.log(`✅ Cache HIT for ${short_code}`);
+      
+      // Log click (async, don't wait)
+      db.query(
+        'INSERT INTO click_logs (short_code) VALUES ($1)',
+        [short_code]
+      ).catch(err => console.error('Error logging click:', err));
       
       // Increment click count (async, don't wait)
       db.query(
@@ -153,6 +162,12 @@ async function redirectURL(req, res) {
     // Step 3: Store in cache for next time
     await setCache(cacheKey, long_url);
     console.log(`💾 Cached ${short_code} for future requests`);
+    
+    // Log click (async, don't wait)
+    db.query(
+      'INSERT INTO click_logs (short_code) VALUES ($1)',
+      [short_code]
+    ).catch(err => console.error('Error logging click:', err));
     
     // Increment click count (async, don't wait)
     db.query(
@@ -220,8 +235,69 @@ async function getURLStats(req, res) {
   }
 }
 
+/**
+ * Get click analytics with time series data
+ */
+async function getClickAnalytics(req, res) {
+  try {
+    const { short_code } = req.params;
+    
+    // Check if URL exists
+    const urlCheck = await db.query(
+      'SELECT * FROM urls WHERE short_code = $1',
+      [short_code]
+    );
+    
+    if (urlCheck.rows.length === 0) {
+      return res.status(404).json({ 
+        error: 'Short URL not found' 
+      });
+    }
+    
+    // Get clicks grouped by day (last 30 days)
+    const clicksByDay = await db.query(
+      `SELECT 
+        DATE(clicked_at) as date,
+        COUNT(*) as clicks
+      FROM click_logs
+      WHERE short_code = $1 
+        AND clicked_at >= NOW() - INTERVAL '30 days'
+      GROUP BY DATE(clicked_at)
+      ORDER BY date ASC`,
+      [short_code]
+    );
+    
+    // Get clicks grouped by hour (last 24 hours)
+    const clicksByHour = await db.query(
+      `SELECT 
+        DATE_TRUNC('hour', clicked_at) as hour,
+        COUNT(*) as clicks
+      FROM click_logs
+      WHERE short_code = $1 
+        AND clicked_at >= NOW() - INTERVAL '24 hours'
+      GROUP BY DATE_TRUNC('hour', clicked_at)
+      ORDER BY hour ASC`,
+      [short_code]
+    );
+    
+    res.status(200).json({
+      short_code,
+      total_clicks: urlCheck.rows[0].click_count,
+      clicks_by_day: clicksByDay.rows,
+      clicks_by_hour: clicksByHour.rows
+    });
+    
+  } catch (error) {
+    console.error('Error fetching click analytics:', error);
+    res.status(500).json({ 
+      error: 'Internal server error' 
+    });
+  }
+}
+
 module.exports = { 
   shortenURL, 
   redirectURL,
-  getURLStats 
+  getURLStats,
+  getClickAnalytics
 };

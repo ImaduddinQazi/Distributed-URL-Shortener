@@ -56,4 +56,19 @@ export const healthCheck = async () => {
   }
 };
 
+/**
+ * Get click analytics
+ */
+export const getClickAnalytics = async (shortCode) => {
+  try {
+    const response = await api.get(`/analytics/${shortCode}`);
+    return { success: true, data: response.data };
+  } catch (error) {
+    return { 
+      success: false, 
+      error: error.response?.data?.error || 'Failed to fetch analytics' 
+    };
+  }
+};
+
 export default api;
