@@ -8,7 +8,7 @@ function Footer() {
             <div className="flex items-center space-x-2 mb-4">
               <span className="text-2xl">🔗</span>
               <span className="text-xl font-semibold text-white">
-                LinkKit
+                EdgeURL
               </span>
             </div>
             <p className="text-sm text-gray-400 mb-4">
@@ -60,7 +60,7 @@ function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-sm">
           <p className="text-gray-400">
-            © {new Date().getFullYear()} LinkKit. Built as a portfolio project.
+            © {new Date().getFullYear()} EdgeURL. Built as a portfolio project.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-white transition">Privacy</a>
