@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import ShortenPage from './pages/ShortenPage';
 import AnalyticsPage from './pages/AnalyticsPage';
@@ -16,6 +17,7 @@ function App() {
           <Route path="/analytics" element={<AnalyticsPage />} />
           <Route path="/status" element={<StatusPage />} />
         </Routes>
+        <Footer /> 
       </div>
     </Router>
   );
