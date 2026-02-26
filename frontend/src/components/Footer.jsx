@@ -64,8 +64,8 @@ function Footer() {
             © {new Date().getFullYear()} EdgeURL. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition">Privacy</a>
-            <a href="#" className="hover:text-white transition">Terms</a>
+            {/* <a href="#" className="hover:text-white transition">Privacy</a>
+            <a href="#" className="hover:text-white transition">Terms</a> */}
             <a href="#" className="hover:text-white transition">Documentation</a>
           </div>
         </div>
