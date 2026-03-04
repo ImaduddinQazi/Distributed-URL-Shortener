@@ -189,11 +189,11 @@ function AnalyticsPage() {
             <div className="lg:col-span-2 space-y-6">
               {analytics && (
                 <>
-                  <ClickChart
+                  {/* <ClickChart
                     data={analytics.clicks_by_hour}
                     title="Clicks in Last 24 Hours"
                     timeRange="hour"
-                  />
+                  /> */}
                   <ClickChart
                     data={analytics.clicks_by_day}
                     title="Clicks in Last 30 Days"
