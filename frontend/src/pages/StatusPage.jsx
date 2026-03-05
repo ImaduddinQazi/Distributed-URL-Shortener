@@ -112,21 +112,6 @@ function StatusPage() {
             </div>
           </div>
         )}
-
-        {/* Tech Stack */}
-        <div className="mt-6 bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h3 className="font-semibold text-gray-900 mb-4">Technology Stack</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <TechBadge name="Node.js" />
-            <TechBadge name="Express" />
-            <TechBadge name="PostgreSQL" />
-            <TechBadge name="Redis" />
-            <TechBadge name="React" />
-            <TechBadge name="Tailwind" />
-            <TechBadge name="Vite" />
-            <TechBadge name="Vercel" />
-          </div>
-        </div>
       </div>
     </div>
   );
