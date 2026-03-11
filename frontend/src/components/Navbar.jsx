@@ -18,7 +18,8 @@ function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group" onClick={handleNavClick}>
-            <span className="text-2xl">🔗</span>
+            {/* <span className="text-2xl">🔗</span> */}
+            <img src="/logoF.png" alt="EdgeURL Logo" className="h-20 w-20" />
             <span className="text-xl font-semibold text-white group-hover:text-blue-400 transition">
               EdgeURL
             </span>
