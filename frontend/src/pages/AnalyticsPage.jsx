@@ -89,7 +89,7 @@ function AnalyticsPage() {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="e.g., 1 or http://localhost:3000/1"
+                  placeholder="e.g., 1, abc, or https://edgeurl.onrender.com/abc"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition"
                 />
                 <p className="text-xs text-gray-500 mt-2">
