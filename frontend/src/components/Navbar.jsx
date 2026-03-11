@@ -69,26 +69,29 @@ function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden pb-4">
+        {/* Mobile Menu with Slide Animation */}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+            }`}
+        >
+          <div className="pb-4 pt-2">
             <div className="flex flex-col space-y-2">
-              <MobileNavLink 
-                to="/shorten" 
+              <MobileNavLink
+                to="/shorten"
                 active={isActive('/shorten')}
                 onClick={handleNavClick}
               >
                 Shorten
               </MobileNavLink>
-              <MobileNavLink 
-                to="/analytics" 
+              <MobileNavLink
+                to="/analytics"
                 active={isActive('/analytics')}
                 onClick={handleNavClick}
               >
                 Analytics
               </MobileNavLink>
-              <MobileNavLink 
-                to="/status" 
+              <MobileNavLink
+                to="/status"
                 active={isActive('/status')}
                 onClick={handleNavClick}
               >
@@ -96,7 +99,7 @@ function Navbar() {
               </MobileNavLink>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );
