@@ -45,17 +45,17 @@ function HomePage() {
           
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <FeatureCard 
-              icon="⚡"
+              // icon="⚡"
               title="Lightning Fast"
               description="Redis caching ensures sub-millisecond redirects for all your links"
             />
             <FeatureCard 
-              icon="📊"
+              // icon="📊"
               title="Real-time Analytics"
               description="Track clicks with detailed charts and insights in real-time"
             />
             <FeatureCard 
-              icon="📱"
+              // icon="📱"
               title="QR Codes"
               description="Auto-generated QR codes for every shortened URL"
             />
