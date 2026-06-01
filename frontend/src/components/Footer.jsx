@@ -84,7 +84,7 @@ function Footer() {
           <div className="flex space-x-6 mt-4 md:mt-0">
             {/* <a href="#" className="hover:text-white transition">Privacy</a>
             <a href="#" className="hover:text-white transition">Terms</a> */}
-            <a href="https://github.com/ImaduddinQazi/ShortFast/blob/main/README.md" className="hover:text-white transition">Documentation</a>
+            <a href="https://github.com/ImaduddinQazi/ShortFast/blob/main/DESIGN.md" className="hover:text-white transition">Documentation</a>
           </div>
         </div>
       </div>
